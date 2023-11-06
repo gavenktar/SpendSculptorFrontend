@@ -6,6 +6,7 @@ import { NavLink} from "react-router-dom";
 import {alignPropType} from "react-bootstrap/types";
 
 const Home=  () => {
+
     const linkStyle = {
         color: 'white',
         width:'100%'
@@ -34,7 +35,7 @@ const Home=  () => {
                 <Card.Body>
                     <Card.Title>3) Добавьте расходы</Card.Title>
                     <Button variant="primary" >
-                        <NavLink style={linkStyle} to="/">Перейти к расходам</NavLink>
+                        <NavLink style={linkStyle} to="/accounts">Перейти к расходам</NavLink>
                     </Button>
                 </Card.Body>
             </Card>
