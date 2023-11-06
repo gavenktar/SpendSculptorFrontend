@@ -50,6 +50,10 @@
   color:black;
 }
 
+.AlignLeft {
+  text-align: left;
+}
+
 
 .App {
   background-color: white;

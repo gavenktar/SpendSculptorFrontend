@@ -3,11 +3,13 @@ import {instance} from "../../api/axiosConfig";
 import AccountCard from "../accountCard/AccountCard";
 import {useEffect, useState} from "react";
 import Container from "react-bootstrap/Container";
+import { newAccountFakeObject } from "../../constants/Constants"
 
 const Accounts = () => {
 
     const [data, setData] = useState([]);
 
+    const [result, setResult] = useState();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -21,6 +23,7 @@ const Accounts = () => {
 
         fetchData();
     }, []);
+
 
     return (
         <>
@@ -36,6 +39,7 @@ const Accounts = () => {
                             }
                         )
                     }
+                    <AccountCard item={newAccountFakeObject}/>
                 </CardGroup>
             </Container>
         </>

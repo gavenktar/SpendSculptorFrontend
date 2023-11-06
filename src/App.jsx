@@ -7,6 +7,7 @@ import Home from './component/home/Home'
 import Auth from './component/auth/auth'
 import {useState} from "react";
 import Accounts from "./component/Accounts/Accounts";
+import AccountForm from "./component/Accounts/AccountForm";
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
                     <Route path="/" element={<Home/>}/>
                     <Route path="/auth"  element={<Auth updateHeaderState = {updateHeaderState} />}/>
                     <Route path="/accounts" element={<Accounts/>} />
+                    <Route path="/account/new" element={<AccountForm />} />
                 </Routes>
         </div>
     );
