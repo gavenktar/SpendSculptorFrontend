@@ -1,6 +1,6 @@
 import {CardGroup} from "react-bootstrap";
 import {instance} from "../../api/axiosConfig";
-import AccountCard from "../accountCard/AccountCard";
+import AccountCard from "./accountCard/AccountCard";
 import {useEffect, useState} from "react";
 import Container from "react-bootstrap/Container";
 import { newAccountFakeObject } from "../../constants/Constants"
@@ -11,16 +11,16 @@ const Accounts = () => {
 
     const [result, setResult] = useState();
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await instance.get("/accounts");
-                setData(response.data);
-            } catch (error) {
-                console.error("Ошибка при загрузке данных", error);
-            }
-        };
+    const fetchData = async () => {
+        try {
+            const response = await instance.get("/accounts");
+            setData(response.data);
+        } catch (error) {
+            console.error("Ошибка при загрузке данных", error);
+        }
+    };
 
+    useEffect(() => {
         fetchData();
     }, []);
 
@@ -35,7 +35,7 @@ const Accounts = () => {
                     {
                         data.map(
                             (item) => {
-                                return <AccountCard item={item}/>
+                                return <AccountCard item={item} fetchData = {fetchData} />
                             }
                         )
                     }

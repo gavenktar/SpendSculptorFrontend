@@ -1,0 +1,379 @@
+import {useEffect, useState} from "react";
+import {instance} from "../../api/axiosConfig";
+import {useParams} from "react-router-dom";
+import Container from "react-bootstrap/Container";
+import {Col, Form, FormCheck, Row} from "react-bootstrap";
+import Card from "react-bootstrap/Card";
+import ReceiptChart from "./AccountPage/ReceiptChart";
+
+const data = {
+    userRole: "ACCOUNT_CREATOR",
+    weight : 0.8,
+    account: {
+        id: 3552,
+        name: "Личный счет",
+        dateCreated: "2023-09-04"
+    },
+    userList: [
+        {
+            id: 2552,
+            identity: {
+                id: 2552,
+                surname: "Иванов",
+                name: "Александр"
+            },
+            login: "alex",
+            role: "ROLE_USER"
+        }
+    ],
+    goalList: [
+        {
+            name: null,
+            created: "08-10-2023",
+            valid: "14-11-2023",
+            goal: 4000.00,
+            state: 400.00
+        },
+        {
+            name: null,
+            created: "08-10-2023",
+            valid: "14-11-2023",
+            goal: 4000.00,
+            state: 400.00
+        }
+    ],
+    receiptList: [
+        {
+            receiptId: 1,
+            date: "05-11-2023",
+            account: {
+                account: {
+                    id: 3552,
+                    name: "Личный счет",
+                    dateCreated: "2023-09-04"
+                },
+                user: {
+                    id: 2552,
+                    identity: {
+                        id: 2552,
+                        surname: "Иванов",
+                        name: "Александр"
+                    },
+                    login: "alex",
+                    role: "ROLE_USER"
+                },
+                weight: 1.0,
+                permission: "ACCOUNT_CREATOR",
+                id: 3302
+            },
+            shop: {
+                name: "Хуета"
+            },
+            total: 25.00,
+            positionList: [
+                {
+                    positionId: 8,
+                    name: "Сыр брынза",
+                    price: 10.00,
+                    category: {
+                        categoryId: 1,
+                        categoryName: "Выпивка"
+                    }
+                },
+                {
+                    positionId: 7,
+                    name: "Сыр брынза",
+                    price: 10.00,
+                    category: {
+                        categoryId: 1,
+                        categoryName: "Выпивка"
+                    }
+                },
+                {
+                    positionId: 6,
+                    name: "Сыр брынза",
+                    price: 10.00,
+                    category: {
+                        categoryId: 1,
+                        categoryName: "Выпивка"
+                    }
+                },
+                {
+                    positionId: 5,
+                    name: "Сыр брынза",
+                    price: 10.00,
+                    category: {
+                        categoryId: 1,
+                        categoryName: "Выпивка"
+                    }
+                },
+                {
+                    positionId: 4,
+                    name: "Сыр брынза",
+                    price: 10.00,
+                    category: {
+                        categoryId: 1,
+                        categoryName: "Выпивка"
+                    }
+                },
+                {
+                    positionId: 3,
+                    name: "Сыр брынза",
+                    price: 10.00,
+                    category: {
+                        categoryId: 1,
+                        categoryName: "Выпивка"
+                    }
+                },
+                {
+                    positionId: 2,
+                    name: "Сыр брынза",
+                    price: 10.00,
+                    category: {
+                        categoryId: 1,
+                        categoryName: "Выпивка"
+                    }
+                },
+                {
+                    positionId: 1,
+                    name: "Сыр брынза",
+                    price: 10.00,
+                    category: {
+                        categoryId: 1,
+                        categoryName: "Выпивка"
+                    }
+                }
+            ]
+        },
+        {
+            receiptId: 1,
+            date: "04-11-2023",
+            account: {
+                account: {
+                    id: 3552,
+                    name: "Личный счет",
+                    dateCreated: "2023-09-04"
+                },
+                user: {
+                    id: 2552,
+                    identity: {
+                        id: 2552,
+                        surname: "Иванов",
+                        name: "Александр"
+                    },
+                    login: "alex",
+                    role: "ROLE_USER"
+                },
+                weight: 1.0,
+                permission: "ACCOUNT_CREATOR",
+                id: 3302
+            },
+            shop: {
+                name: "Хуета"
+            },
+            total: 25.00,
+            positionList: [
+                {
+                    positionId: 8,
+                    name: "Сыр брынза",
+                    price: 10.00,
+                    category: {
+                        categoryId: 1,
+                        categoryName: "Выпивка"
+                    }
+                },
+                {
+                    positionId: 7,
+                    name: "Сыр брынза",
+                    price: 10.00,
+                    category: {
+                        categoryId: 1,
+                        categoryName: "Выпивка"
+                    }
+                },
+                {
+                    positionId: 6,
+                    name: "Сыр брынза",
+                    price: 10.00,
+                    category: {
+                        categoryId: 1,
+                        categoryName: "Выпивка"
+                    }
+                },
+                {
+                    positionId: 5,
+                    name: "Сыр брынза",
+                    price: 10.00,
+                    category: {
+                        categoryId: 1,
+                        categoryName: "Выпивка"
+                    }
+                },
+                {
+                    positionId: 4,
+                    name: "Сыр брынза",
+                    price: 10.00,
+                    category: {
+                        categoryId: 1,
+                        categoryName: "Выпивка"
+                    }
+                },
+                {
+                    positionId: 3,
+                    name: "Сыр брынза",
+                    price: 10.00,
+                    category: {
+                        categoryId: 1,
+                        categoryName: "Выпивка"
+                    }
+                },
+                {
+                    positionId: 2,
+                    name: "Сыр брынза",
+                    price: 10.00,
+                    category: {
+                        categoryId: 1,
+                        categoryName: "Выпивка"
+                    }
+                },
+                {
+                    positionId: 1,
+                    name: "Сыр брынза",
+                    price: 10.00,
+                    category: {
+                        categoryId: 1,
+                        categoryName: "Выпивка"
+                    }
+                }
+            ]
+        }
+    ]
+};
+
+
+const AccountPage = () => {
+
+
+    const {id} = useParams();
+
+    let newDate = new Date().toISOString().slice(0, 10);
+
+    const [dateStart, setDateStart] = useState(data.account.dateCreated)
+    const [dateEnd, setDateEnd] = useState(newDate);
+
+    //const [data, setData] = useState([]);
+
+    const [result, setResult] = useState();
+
+    const [enabled, setEnabled] = useState(false)
+
+    const [datalist, setDataList] = useState([])
+
+    const filterList = ()=>{
+        setDataList(data.receiptList.filter(item =>{
+                const dateA = new Date(dateStart.replace(/-/g, '/'));
+                const dateB = new Date(dateEnd.replace(/-/g, '/'));
+                const dateC = new Date(item.date.replace(/-/g, '/'));
+                return (dateA - dateC <= 0) && (dateB - dateC>=0)
+                }
+            )
+        )
+    }
+
+    useEffect( () => {
+        filterList();
+        },[dateStart,dateEnd]);
+
+
+    const handleCheck = (e) =>{
+        setEnabled(!enabled);
+        if (enabled === true) {
+            setDateEnd(newDate);
+            setDateStart(data.account.dateCreated)
+        }
+    }
+
+
+    /* const fetchData = async () => {
+         try {
+             const response = await instance.get(`/accounts/${id}`);
+             setData(response.data);
+         } catch (error) {
+             console.error("Ошибка при загрузке данных", error);
+         }
+     };
+
+     useEffect(() => {
+         fetchData();
+     }, []);
+
+     */
+
+    const handleStartDate = (e) =>{
+        setDateStart(e.target.value)
+    }
+
+    const handleEndDate = (e) =>{
+        setDateEnd(e.target.value)
+    }
+
+    if (id === undefined || id === null) return
+
+
+    return (
+        <div style={{width: '99%'}} >
+        <Container className="p-2 flex-column flex-grow-1 m-2 w-100" fluid>
+            <Row className="flex-grow-1 border-2 m-2 rounded-1 justify-content-md-center">
+                <Card >
+                    <Card.Title> Общая информация </Card.Title>
+                    <Card.Subtitle className="m-1"> Название {data.account.name } </Card.Subtitle>
+                    <Card.Subtitle className="m-1"> Дата
+                        создания {data.account.dateCreated}</Card.Subtitle>
+                </Card>
+            </Row>
+            <Row className="m-2">
+                <Col>
+                <Card >
+                    <Card.Title className="p-2"> Выбрать период рассмотрения</Card.Title>
+                    <Card.Body>
+                        <Form.Check
+                            type="checkbox"
+                            style={{
+                                textAlign: "start"
+                            }}
+                            name = "check"
+                            label="Включить форму"
+                            className="m-2"
+                            onClick={handleCheck}
+                        />
+                        <Form name="date" >
+                            <Form.Control className="m-2" value={dateStart} onChange={handleStartDate} type="date" disabled={!enabled}></Form.Control>
+                            <Form.Control className="m-2" value={dateEnd} onChange={handleEndDate} type="date" disabled={!enabled}>
+                            </Form.Control>
+                        </Form>
+                    </Card.Body>
+                </Card>
+                </Col>
+                <Col>
+                    <Card className="rounded-1 border-2 ">
+                        <Card.Title> График расходов</Card.Title>
+                        <ReceiptChart receiptList={datalist} weight={data.weight}></ReceiptChart>
+                    </Card>
+                </Col>
+            </Row>
+            <Row className="flex-row flex-wrap flex-grow-1"> Other graph
+                <Col> График расходов
+
+                </Col>
+                <Col> Пользователи</Col>
+                <Col> Панелька пользователей</Col>
+                <Col> Расходы</Col>
+                <Col> Цели</Col>
+            </Row>
+        </Container>
+            </div>
+    )
+
+}
+
+export default AccountPage

@@ -6,7 +6,7 @@ import {NavLink} from "react-router-dom";
 import {useContext, useEffect, useState} from "react";
 import {instance} from "../../api/axiosConfig";
 
-const Header = ({headerData}) => {
+const Header = ({headerData, updateData}) => {
 
     /*
         instance.post("/login", {
@@ -15,6 +15,12 @@ const Header = ({headerData}) => {
         }).then(r => console.log(r));
 
      */
+
+    const handleLogout= () => {
+        localStorage.removeItem("username",null)
+        localStorage.removeItem("token",null)
+        updateData(null);
+    }
 
 
     return (
@@ -46,7 +52,7 @@ const Header = ({headerData}) => {
                             <>
                                 <Button variant="outline-info" className="me-3"> <NavLink className="nav-link"
                                                                                           to="/">{headerData} </NavLink></Button>
-                                <Button variant="outline-info" className="me-3"> <NavLink className="nav-link"
+                                <Button variant="outline-info" className="me-3" onClick={handleLogout}> <NavLink className="nav-link"
                                                                                           to="/">Выйти </NavLink></Button>
 
                             </>

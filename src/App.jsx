@@ -8,12 +8,13 @@ import Auth from './component/auth/auth'
 import {useState} from "react";
 import Accounts from "./component/Accounts/Accounts";
 import AccountForm from "./component/Accounts/AccountForm";
+import AccountPage from "./component/Accounts/AccountPage";
 
 
 function App() {
 
 
-    const [headerData, setHeaderData] = useState(null)
+    const [headerData, setHeaderData] = useState(localStorage.getItem("username"))
 
     const updateHeaderState  = (newHeaderData) =>{
         setHeaderData(newHeaderData);
@@ -22,12 +23,13 @@ function App() {
 
     return (
         <div className="App">
-                <Header headerData = {headerData} />
+                <Header headerData = {headerData} updateData={updateHeaderState} />
                 <Routes>
                     <Route path="/" element={<Home/>}/>
                     <Route path="/auth"  element={<Auth updateHeaderState = {updateHeaderState} />}/>
                     <Route path="/accounts" element={<Accounts/>} />
                     <Route path="/account/new" element={<AccountForm />} />
+                    <Route path="/account/:id" element={<AccountPage/>}/>
                 </Routes>
         </div>
     );
