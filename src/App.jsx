@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import Header from './component/header/Header'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,6 +8,7 @@ import {useState} from "react";
 import Accounts from "./component/Accounts/Accounts";
 import AccountForm from "./component/Accounts/AccountForm";
 import AccountPage from "./component/Accounts/AccountPage";
+import ReceiptPage from "./component/Receipt/ReceiptPage";
 
 
 function App() {
@@ -30,6 +30,7 @@ function App() {
                     <Route path="/accounts" element={<Accounts/>} />
                     <Route path="/account/new" element={<AccountForm />} />
                     <Route path="/account/:id" element={<AccountPage/>}/>
+                    <Route path="/account/:id/receipts" element = {<ReceiptPage />}/>
                 </Routes>
         </div>
     );

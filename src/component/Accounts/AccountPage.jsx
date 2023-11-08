@@ -138,7 +138,7 @@ const data = {
     "receiptList": [
         {
             "receiptId": 1,
-            "date": "05-11-2023",
+            "date": "11-05-2023",
             "account": {
                 "account": {
                     "id": 3552,
