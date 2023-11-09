@@ -88,7 +88,7 @@ const ReceiptTable = ({receiptList, userid, permission, setList, weight, account
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
+                    {/* <tr>
                         <td>
                             <input placeholder="Начинайте вводить" className="m-2" disabled={!filter}/>
                         </td>
@@ -108,6 +108,7 @@ const ReceiptTable = ({receiptList, userid, permission, setList, weight, account
                             Включить фильтры
                         </td>
                     </tr>
+                    */}
                     {receiptList.map((item, index) => (
                         <>
                             <tr key={index}>
