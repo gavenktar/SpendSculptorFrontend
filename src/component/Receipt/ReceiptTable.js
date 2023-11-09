@@ -4,12 +4,14 @@ import {useState} from "react";
 import ReceiptModal from "./ReceiptModal";
 import parseDate from "../../utils/utils";
 
-const ReceiptTable = ({receiptList, userid, permission, setList, weight, account}) => {
+const ReceiptTable = ({receiptList, userid, permission, setList, weight, account, categories, setCategories}) => {
 
     const grantedAccess = (item) => {
         if (permission[item.account.account.id] === "ACCOUNT_CREATOR" || "ACCOUNT_ADMIN") return true;
         return item.user.id === userid;
     }
+
+
 
 
     const confirm = (receipt) =>{
@@ -67,7 +69,7 @@ const ReceiptTable = ({receiptList, userid, permission, setList, weight, account
     return (
         <>
             {show && <ReceiptModal state={show} receipt={currReceipt} setCurrReceipt = {setCurrReceipt} changeMode={onchange} inputFields={inputFields}
-                                handle={handleClose} confirm={confirm}  changeInputFields = {changeInputFields} />}
+                                handle={handleClose}  confirm={confirm} categories ={categories}  setCategories = {setCategories}  changeInputFields = {changeInputFields} />}
 
             <div className="table-responsive">
                 <Table className="border-1" bordered border={2} striped hover>
@@ -128,7 +130,7 @@ const ReceiptTable = ({receiptList, userid, permission, setList, weight, account
                                 </td>
 
                                 {grantedAccess(item) ?
-                                    <td>
+                                    <td key={index}>
                                         <Button  id={index} onClick={deleteCheck}>Удалить чек</Button>
                                     </td>
                                     : <td></td>

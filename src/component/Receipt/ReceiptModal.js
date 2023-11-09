@@ -4,7 +4,7 @@ import parseDate from "../../utils/utils";
 import Button from "react-bootstrap/Button";
 
 
-const ReceiptModal = ({state, receipt, changeReceipt, changeMode, inputFields, changeInputFields, confirm, handle}) => {
+const ReceiptModal = ({state, receipt, setCurrReceipt, changeMode,categories, setCategories, inputFields, changeInputFields, confirm, handle}) => {
 
 
     const [date, setDate] = useState(parseDate(new Date(receipt.date)))
@@ -36,18 +36,37 @@ const ReceiptModal = ({state, receipt, changeReceipt, changeMode, inputFields, c
 
 
     const addField = () => {
-        let category = {
-        }
-        category.categoryName = ''
-        let newfield = {name: '', category: category, price: ''}
+        let newfield = {name: '', category: '', price: ''}
         changeInputFields([...inputFields, newfield]);
     }
 
     const handleDate = (e) => {
-        setDate(e.target.value)
+        let newReceipt = receipt;
+        newReceipt.date = e.target.value
+        setCurrReceipt(newReceipt)
+
     }
     console.log(date)
 
+    const returnCategoryByName = (categories, categoryName) => {
+        const index = categories.findIndex((category) => category.categoryName === categoryName);
+        return index !== -1 ? index : 0;
+    }
+
+
+
+    function handleCategory(index, event) {
+        let data = [...inputFields];
+        data[index]["category"] = categories[event.target.value];
+        changeInputFields(data);
+        receipt.total = calculateTotal(receipt)
+    }
+
+    const handleReceipt = (e) =>{
+        let newReceipt = receipt;
+        newReceipt.shop.name = e.target.value
+        setCurrReceipt(newReceipt)
+    }
 
     return (
         <Modal show={state} onHide={handle}>
@@ -56,8 +75,8 @@ const ReceiptModal = ({state, receipt, changeReceipt, changeMode, inputFields, c
             </Modal.Header>
             <ModalBody>
                 <Form>
-                    <Form.Control type="text" value={receipt.shop.name} disabled={!changeMode}></Form.Control>
-                    {!changeMode ? <Form.Control type="text" value={date} disabled></Form.Control> :
+                    <Form.Control type="text" defaultValue={receipt.shop.name} onChange={handleReceipt} disabled={!changeMode}></Form.Control>
+                    {!changeMode ? <Form.Control type="text" value={date} on disabled></Form.Control> :
                         <Form.Control type="date" defaultValue={date} onChange={handleDate}></Form.Control>
                     }
                     <Row className="mt-2">
@@ -72,10 +91,15 @@ const ReceiptModal = ({state, receipt, changeReceipt, changeMode, inputFields, c
                                     <Form.Control type="text" name="name" value={item.name}
                                                   onChange={event => handleFormChange(index, event)}
                                                   disabled={!changeMode}></Form.Control>
-                                    <Form.Control type="text" name="category.CategoryName"
-                                                  onChange={event => handleFormChange(index, event)}
-                                                  value={item.category.categoryName}
-                                                  disabled={!changeMode}></Form.Control>
+                                    <Form.Select type="text" name="category" defaultValue={returnCategoryByName(categories, item.category.categoryName)}
+                                                  onChange={event => handleCategory(index, event)}
+                                                  disabled={!changeMode}>
+                                        {categories.map((item, index) =>(
+                                            <option key={index} value={index}>
+                                                {item.categoryName}
+                                            </option>
+                                        ))}
+                                    </Form.Select>
                                     <Form.Control type="text" name="price"
                                                   onChange={event => handleFormChange(index, event)}
                                                   value={item.price} disabled={!changeMode}></Form.Control>

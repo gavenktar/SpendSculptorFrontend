@@ -2,7 +2,7 @@ import {useState} from "react";
 import ReceiptTable from "../ReceiptTable";
 
 
-const AccountReceipt = ({data, changeData})=>{
+const AccountReceipt = ({data, changeData, setCategories , categories})=>{
 
     const [receiptList, setReceiptList] = useState(data.receiptList);
 
@@ -18,7 +18,7 @@ const AccountReceipt = ({data, changeData})=>{
     }
 
     return (
-        <ReceiptTable receiptList = {receiptList} setList = {setList} userid = {data.accountUser.user.id} permission = {access}  weight={weight} />
+        <ReceiptTable receiptList = {receiptList} setList = {setList} categories = {categories } setCategories = {setCategories} userid = {data.accountUser.user.id} permission = {access}  weight={weight} />
     )
 }
 
