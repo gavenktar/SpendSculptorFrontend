@@ -37,7 +37,7 @@ const Header = ({headerData, updateData}) => {
                         navbarScroll
                     >
                         <NavLink className="nav-link" to="/">Главная страница</NavLink>
-                        <NavLink className="nav-link" to="/">Учесть расходы</NavLink>
+                        <NavLink className="nav-link" to="/receipt/new">Создать чек</NavLink>
                         <NavLink className="nav-link" to="/accounts">Мои счета</NavLink>
                         <NavLink className="nav-link" to="/">О нас</NavLink>
 

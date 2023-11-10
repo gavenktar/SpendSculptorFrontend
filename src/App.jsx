@@ -8,7 +8,9 @@ import {useState} from "react";
 import Accounts from "./component/Accounts/Accounts";
 import AccountForm from "./component/Accounts/AccountForm";
 import AccountPage from "./component/Accounts/AccountPage";
-import ReceiptPage from "./component/Receipt/ReceiptPage";
+import ReceiptPage from "./component/Receipt/Page/ReceiptPage";
+import {LineElement} from "chart.js";
+import NewModal from "./component/Receipt/New/NewModal";
 
 
 function App() {
@@ -31,6 +33,7 @@ function App() {
                     <Route path="/account/new" element={<AccountForm />} />
                     <Route path="/account/:id" element={<AccountPage/>}/>
                     <Route path="/account/:id/receipts" element = {<ReceiptPage />}/>
+                    <Route path="/account/:id/receipt/new" element={<NewModal/>} />
                 </Routes>
         </div>
     );

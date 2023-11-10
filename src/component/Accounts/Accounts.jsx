@@ -11,6 +11,8 @@ const Accounts = () => {
 
     const [result, setResult] = useState();
 
+
+
     const fetchData = async () => {
         try {
             const response = await instance.get("/accounts");
@@ -20,10 +22,10 @@ const Accounts = () => {
         }
     };
 
+
     useEffect(() => {
         fetchData();
     }, []);
-
 
     return (
         <>

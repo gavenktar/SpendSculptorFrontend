@@ -1,19 +1,47 @@
-import {Col, Form, InputGroup, Modal, ModalBody, Row, Table} from "react-bootstrap";
+import {ButtonGroup, Col, Form, InputGroup, Modal, ModalBody, Row, Table} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import parseDate from "../../utils/utils";
 import Button from "react-bootstrap/Button";
 
 
-const ReceiptModal = ({state, receipt, setCurrReceipt, changeMode,categories, setCategories, inputFields, changeInputFields, confirm, handle}) => {
+const ReceiptModal = ({
+                          state,
+                          receipt,
+                          setCurrReceipt,
+                          changeMode,
+                          categories,
+                          inputFields,
+                          changeInputFields,
+                          confirm,
+                          handle
+                      }) => {
 
+    let buffdate = {};
+    try {
+        const dateValue = new Date(receipt.date);
+        if (!isNaN(dateValue.getTime())) {
+            buffdate = dateValue;
+            buffdate.setDate(buffdate.getDate()+1)
+        } else {
+            buffdate = new Date();
+        }
+    } catch (e) {
+        buffdate = new Date();
+    }
+    let newDate =buffdate.toISOString().slice(0, 10);
 
-    const [date, setDate] = useState(parseDate(new Date(receipt.date)))
+    const [date, setDate] = useState(newDate)
     let category = {}
     category.categoryname = ''
 
     const calculateTotal = (receiptList) => {
-        return receipt.positionList.map(position => position.price).flat()
-            .reduce((acc, price) => acc + parseFloat(price), 0);
+        try {
+            return receipt.positionList.map(position => position.price).flat()
+                .reduce((acc, price) => acc + parseFloat(price), 0);
+        } catch (e) {
+            return 0
+        }
+
     }
 
     const handleFormChange = (index, event) => {
@@ -22,6 +50,7 @@ const ReceiptModal = ({state, receipt, setCurrReceipt, changeMode,categories, se
         changeInputFields(data); // change into enum type;
         receipt.total = calculateTotal(receipt)
     }
+
 
     const save = (e) => {
         e.preventDefault();
@@ -48,11 +77,12 @@ const ReceiptModal = ({state, receipt, setCurrReceipt, changeMode,categories, se
     }
     console.log(date)
 
-    const returnCategoryByName = (categories, categoryName) => {
+    const returnCategoryByName = (categories, category) => {
+        if (category === null) return 0;
+        let categoryName = category.categoryName
         const index = categories.findIndex((category) => category.categoryName === categoryName);
         return index !== -1 ? index : 0;
     }
-
 
 
     function handleCategory(index, event) {
@@ -60,9 +90,9 @@ const ReceiptModal = ({state, receipt, setCurrReceipt, changeMode,categories, se
         data[index]["category"] = categories[event.target.value];
         changeInputFields(data);
         receipt.total = calculateTotal(receipt)
-    }
+}
 
-    const handleReceipt = (e) =>{
+    const handleReceipt = (e) => {
         let newReceipt = receipt;
         newReceipt.shop.name = e.target.value
         setCurrReceipt(newReceipt)
@@ -75,7 +105,8 @@ const ReceiptModal = ({state, receipt, setCurrReceipt, changeMode,categories, se
             </Modal.Header>
             <ModalBody>
                 <Form>
-                    <Form.Control type="text" defaultValue={receipt.shop.name} onChange={handleReceipt} disabled={!changeMode}></Form.Control>
+                    <Form.Control type="text" defaultValue={receipt.shop.name || " "} onChange={handleReceipt}
+                                  disabled={!changeMode}></Form.Control>
                     {!changeMode ? <Form.Control type="text" value={date} on disabled></Form.Control> :
                         <Form.Control type="date" defaultValue={date} onChange={handleDate}></Form.Control>
                     }
@@ -91,10 +122,11 @@ const ReceiptModal = ({state, receipt, setCurrReceipt, changeMode,categories, se
                                     <Form.Control type="text" name="name" value={item.name}
                                                   onChange={event => handleFormChange(index, event)}
                                                   disabled={!changeMode}></Form.Control>
-                                    <Form.Select type="text" name="category" defaultValue={returnCategoryByName(categories, item.category.categoryName)}
-                                                  onChange={event => handleCategory(index, event)}
-                                                  disabled={!changeMode}>
-                                        {categories.map((item, index) =>(
+                                    <Form.Select type="text" name="category"
+                                                 defaultValue={returnCategoryByName(categories, item.category)}
+                                                 onChange={event => handleCategory(index, event)}
+                                                 disabled={!changeMode}>
+                                        {categories.map((item, index) => (
                                             <option key={index} value={index}>
                                                 {item.categoryName}
                                             </option>
@@ -120,11 +152,14 @@ const ReceiptModal = ({state, receipt, setCurrReceipt, changeMode,categories, se
                         </Col>
                     </Row>
                 </Form>
-                <Row>
-                    {changeMode && <> <Button className="m-2" variant="primary" onClick={save}>
+                <Row className="justify-content-center">
+                    {changeMode && <> <ButtonGroup> <Button className="m-2" variant="primary"
+                                                            onClick={save}>
                         Save Changes
                     </Button>
                         <Button className="m-2" onClick={addField}>Add More..</Button>
+                    </ButtonGroup>
+
                     </>
                     }
                 </Row>

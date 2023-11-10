@@ -3,9 +3,12 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal"
 import {useParams} from "react-router-dom";
 import Card from "react-bootstrap/Card";
-import {Col, Row} from "react-bootstrap";
+import {Alert, Col, Row} from "react-bootstrap";
 import ReceiptModal from "../ReceiptModal";
 import ImageModal from "./Image/ImageModal";
+import {instance} from "../../../api/axiosConfig";
+import {EmptyReceipt} from "../../../constants/Constants";
+
 
 const mock1 = [
     {
@@ -18,26 +21,6 @@ const mock1 = [
     }
 ]
 
-
-const EmptyReceipt = {
-    receiptId: '',
-    date: '',
-    shop: {
-        name: '',
-    },
-    total: 0,
-    positionList: [
-        {
-            positionId: '',
-            name: '',
-            price: '',
-            category: {
-                categoryId: '',
-                categoryName: '',
-            },
-        }
-    ]
-}
 
 
 const NewModal = () => {
@@ -59,10 +42,17 @@ const NewModal = () => {
 
     const [imageModalState, setImageModalState] = useState(false)
 
+    const closeOnConfirm = (newRec)=>{
+        changeInputShow(true);
+        setInputFields(newRec.positionList)
+    }
+
     const showImage =  () => {
         handleModalClose()
         setImageModalState(true)
     }
+
+    const [message, setMessage] = useState(null)
 
     const showInput = () =>{
         closeImage()
@@ -80,15 +70,25 @@ const NewModal = () => {
         changeInputShow(false);
     }
 
-    const confirm = () => {
+    const confirm = async () => {
+        const url = `account/${accountid.id}/receipt/new`;
 
-        handleModalClose()
+
+
+        try {
+            const data =JSON.parse(JSON.stringify(newReceipt, (key, value) => (value === '' ? null : value), 2));
+            const result = await instance.post(url, data)
+            setMessage("Чек успешно добавлен")
+            handleModalClose()
+        }catch (e){
+            setMessage("Произошла ошибка")
+        }
     }
 
     return (
         <>
-            <ImageModal newReceipt={newReceipt} state={imageModalState} close={closeImage} setNewReceipt={changeReceipt} />
-
+            {message && <Alert > {message}</Alert>}
+            <ImageModal newReceipt={newReceipt} state={imageModalState} close={closeImage} closeOnConfirm={closeOnConfirm} setNewReceipt={changeReceipt} />
             <ReceiptModal receipt={newReceipt} confirm={confirm} handle={handleModalClose} changeMode={changeMode}
                           state={showInputModal} categories={categories} changeInputFields={setInputFields}
                           inputFields={inputFields} setCurrReceipt={changeReceipt}/>

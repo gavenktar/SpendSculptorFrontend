@@ -1,6 +1,6 @@
 import Card from "react-bootstrap/Card";
 import {NavLink, useNavigate} from "react-router-dom";
-import React from "react";
+import React, {useState} from "react";
 import Button from "react-bootstrap/Button";
 import { newAccountFakeObject } from "../../../constants/Constants"
 import {instance} from "../../../api/axiosConfig";
@@ -17,6 +17,7 @@ const AccountCard = (props)=>{
         );
 
     }
+
 
     if (props.item === newAccountFakeObject) {
         return (
@@ -40,7 +41,7 @@ const AccountCard = (props)=>{
                     <NavLink className="nav-link" to={`/account/${props.item.id}`}>Перейти в меню счета</NavLink>
                 </Button>
                 <Button variant="primary " style={{maxWidth: 200}} className="m-2">
-                    <NavLink className="nav-link" to={`/addreceipt/${props.item.id}`}>Добавить чек</NavLink>
+                    <NavLink className="nav-link" to={`/account/${props.item.id}/receipt/new`}>Добавить чек</NavLink>
                 </Button>
                 <Button variant="primary" style={{maxWidth: 200}} onClick={leaveAccount}>
                     <NavLink className="nav-link" to={`/accounts/`}>Выйти из счета</NavLink>

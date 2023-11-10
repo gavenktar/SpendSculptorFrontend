@@ -34,7 +34,11 @@ const Auth = (props)=> {
                     navigate("/")
 
                 }
-            })
+            }).catch(
+                e => {
+                    setErrors(e.value)
+                }
+        )
     }
 
     let register = (e)=>{

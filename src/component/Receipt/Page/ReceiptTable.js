@@ -1,8 +1,8 @@
 import {Table} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import {useState} from "react";
-import ReceiptModal from "./ReceiptModal";
-import parseDate from "../../utils/utils";
+import ReceiptModal from "../ReceiptModal";
+import parseDate from "../../../utils/utils";
 
 const ReceiptTable = ({receiptList, userid, permission, setList, weight, account, categories, setCategories}) => {
 
@@ -10,9 +10,6 @@ const ReceiptTable = ({receiptList, userid, permission, setList, weight, account
         if (permission[item.account.account.id] === "ACCOUNT_CREATOR" || "ACCOUNT_ADMIN") return true;
         return item.user.id === userid;
     }
-
-
-
 
     const confirm = (receipt) =>{
         receipt.positionList = inputFields
@@ -70,7 +67,6 @@ const ReceiptTable = ({receiptList, userid, permission, setList, weight, account
         <>
             {show && <ReceiptModal state={show} receipt={currReceipt} setCurrReceipt = {setCurrReceipt} changeMode={onchange} inputFields={inputFields}
                                 handle={handleClose}  confirm={confirm} categories ={categories}  setCategories = {setCategories}  changeInputFields = {changeInputFields} />}
-
             <div className="table-responsive">
                 <Table className="border-1" bordered border={2} striped hover>
                     <thead>
@@ -118,7 +114,7 @@ const ReceiptTable = ({receiptList, userid, permission, setList, weight, account
                                 {!account &&
                                     <td> {item.account.user.identity.name + " " + item.account.user.identity.surname} </td>}
                                 <td> {item.total}</td>
-                                {<td>{parseFloat(item.total) * weight[item.account.account.id]}</td>}
+                                {<td>{parseFloat(item.total) * parseFloat(weight[item.account.account.id] || 1)}</td>}
                                 {grantedAccess(item) ?
                                     <td>
                                         <Button id={index} onClick={handleRClick}>Изменить чек</Button>

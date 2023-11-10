@@ -1,58 +1,80 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal"
-import {Form, Spinner} from "react-bootstrap";
+import {Alert, Form, Spinner} from "react-bootstrap";
 import {useState} from "react";
+import {instance} from "../../../../api/axiosConfig";
 
-const ImageModal = ( {newReceipt, setNewReceipt, state, close}  ) => {
-
-
+const ImageModal = ({newReceipt, setNewReceipt, state, close, closeOnConfirm}) => {
+    const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(false); // Состояние для отслеживания загрузки
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         setIsLoading(true);
+        const formData = new FormData();
+        const image = e.target[0].files[0];
 
-        // Здесь выполняйте загрузку на сервер, например, с использованием Axios
-        // После завершения загрузки, установите состояние загрузки обратно в false
+        formData.append("image", image);
 
-        // Пример с использованием setTimeout для имитации загрузки
-        setTimeout(() => {
+        try {
+            const response = await instance.post('/receipt/upload/image', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            })
+
+
             setIsLoading(false);
-            close(); // Закройте модальное окно после завершения загрузки
-        }, 2000); // Здесь 2000 миллисекунд - это имитация времени загрузки, замените на фактическую загрузку
+
+            const data = JSON.parse(JSON.stringify(response.data, (key, value) => value === null ? "" : value));
+            data.shop = {
+                name :''
+            }
+            setNewReceipt(data);
+            closeOnConfirm(data);
+        } catch (error) {
+
+            setIsLoading(false);
+            setError("Произошла ошибка при загрузке изображения.");
+        }
+
+
     };
 
-    return(  <Modal show={state} onHide={close}>
-        <Modal.Header closeButton>
-            <Modal.Title>Загрузите фотографию и нажмите отправить</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-            {isLoading ? ( // Проверка состояния загрузки
-                <div className="text-center">
-                    <Spinner animation="border" />
-                    <p>Идет загрузка...</p>
-                </div>
-            ) : (
-                <Form className="m-2" onSubmit={handleSubmit}>
-                    <Form.Control
-                        accept="image/jpeg, image/png, image/gif"
-                        className="m-2"
-                        type="file"
-                        placeholder="Загрузите фото"
-                    />
-                    <Button variant="primary" type="submit">
-                        Отправить фото
-                    </Button>
-                </Form>
-            )}
-        </Modal.Body>
-        <Modal.Footer>
-            <Button variant="primary" onClick={close}>
-                Отмена
-            </Button>
-        </Modal.Footer>
-    </Modal>
-);
+    return (<Modal show={state} onHide={close}>
+            <Modal.Header closeButton>
+                <Modal.Title>Загрузите фотографию и нажмите отправить</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                {error && (
+                    <Alert variant="danger">{error}</Alert>
+                )}
+                {isLoading ? (
+                    <div className="text-center">
+                        <Spinner animation="border"/>
+                        <p>Идет загрузка...</p>
+                    </div>
+                ) : (
+                    <Form className="m-2" onSubmit={handleSubmit}>
+                        <Form.Control
+                            accept="image/jpeg, image/png, image/gif"
+                            className="m-2"
+                            type="file"
+                            placeholder="Загрузите фото"
+                        />
+                        <Button variant="primary" type="submit">
+                            Отправить фото
+                        </Button>
+                    </Form>
+                )}
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="primary" onClick={close}>
+                    Отмена
+                </Button>
+            </Modal.Footer>
+        </Modal>
+    );
 };
 
 export default ImageModal
