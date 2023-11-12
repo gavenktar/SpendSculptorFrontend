@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import {useState} from "react";
 import ReceiptModal from "../ReceiptModal";
 import parseDate from "../../../utils/utils";
+import {instance} from "../../../api/axiosConfig";
 
 const ReceiptTable = ({receiptList, userid, permission, setList, weight, account, categories, setCategories}) => {
 
@@ -11,10 +12,15 @@ const ReceiptTable = ({receiptList, userid, permission, setList, weight, account
         return item.user.id === userid;
     }
 
-    const confirm = (receipt) =>{
+    const confirm = async (receipt) => {
         receipt.positionList = inputFields
         receiptList[id] = receipt
         setList(receiptList)
+        const url = `receipt/${receipt.receiptId}/update`
+        const submitData = receiptList[id];
+        submitData.date = parseDate(new Date(submitData.date));
+        const data = JSON.parse(JSON.stringify(receiptList[id], (key, value) => (value === '' ? null : value), 2));
+        const result = await instance.post(url, data)
         handleClose()
     }
     const [id, setId] = useState(0)
@@ -66,7 +72,7 @@ const ReceiptTable = ({receiptList, userid, permission, setList, weight, account
     return (
         <>
             {show && <ReceiptModal state={show} receipt={currReceipt} setCurrReceipt = {setCurrReceipt} changeMode={onchange} inputFields={inputFields}
-                                handle={handleClose}  confirm={confirm} categories ={categories}  setCategories = {setCategories}  changeInputFields = {changeInputFields} />}
+                                handle={handleClose} changeCategories={setCategories} confirm={confirm} categories ={categories}  setCategories = {setCategories}  changeInputFields = {changeInputFields} />}
             <div className="table-responsive">
                 <Table className="border-1" bordered border={2} striped hover>
                     <thead>

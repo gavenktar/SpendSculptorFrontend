@@ -92,4 +92,12 @@ export const EmptyFullAccount = {
     ]
 }
 
+export const ACCOUNT_ROLES = {
+    ACCOUNT_USER : "Пользователь ",
+    ACCOUNT_CREATOR: "Создатель",
+    ACCOUNT_ADMIN : "Администратор"
+}
+
+
+
 

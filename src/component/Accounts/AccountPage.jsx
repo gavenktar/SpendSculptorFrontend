@@ -38,23 +38,29 @@ const AccountPage = () => {
     }, []);
 
 
-    const [dateStart, setDateStart] = useState()
+    const [dateStart, setDateStart] = useState(data.account.dateCreated)
 
-    const [result, setResult] = useState();
+    const [result, setResult] = useState('');
 
     const [enabled, setEnabled] = useState(false)
 
     const [datalist, setDataList] = useState([])
 
     const filterList = () => {
-        setDataList(data.receiptList.filter(item => {
-                    const dateA = new Date(dateStart.replace(/-/g, '/'));
-                    const dateB = new Date(dateEnd.replace(/-/g, '/'));
-                    const dateC = new Date(item.date.replace(/-/g, '/'));
-                    return (dateA - dateC <= 0) && (dateB - dateC >= 0)
-                }
+        if (data.receiptList != null)
+            setDataList(data.receiptList.filter(item => {
+                        const dateA = new Date(dateStart.replace(/-/g, '/'));
+                        const dateB = new Date(dateEnd.replace(/-/g, '/'));
+                        let dateC
+                        if (item.date !=null) {
+                             dateC = new Date(item.date.replace(/-/g, '/'));
+                        }else{
+                            dateC = dateA
+                        }
+                        return (dateA - dateC <= 0) && (dateB - dateC >= 0)
+                    }
+                )
             )
-        )
     }
 
     useEffect(() => {
@@ -123,40 +129,41 @@ const AccountPage = () => {
                             </Row>
                             <Row>
                                 <Button variant="primary" className="h-100">
-                                    <NavLink to={`/account/${id}/receipts`} >
-                                    <text className="text-white">
-                                        Перейти к чекам аккаунта
-                                    </text>
-                                </NavLink>
-                            </Button>
+                                    <NavLink to={`/account/${id}/receipts`}>
+                                        <text className="text-white">
+                                            Перейти к чекам аккаунта
+                                        </text>
+                                    </NavLink>
+                                </Button>
+                            </Row>
                         </Row>
+                    </Col>
+                    <Col>
+                        <Card className="rounded-1 border-2 ">
+                            <Card.Title> График расходов</Card.Title>
+                            <ReceiptChart receiptList={datalist} weight={data.weight}></ReceiptChart>
+                        </Card>
+                    </Col>
                 </Row>
-            </Col>
-            <Col>
-                <Card className="rounded-1 border-2 ">
-                    <Card.Title> График расходов</Card.Title>
-                    <ReceiptChart receiptList={datalist} weight={data.weight}></ReceiptChart>
-                </Card>
-            </Col>
-        </Row>
-    <Row className="flex-row flex-wrap flex-grow-1">
-        <Col className="rounded-1 border-2 border-black mt-2">
-            <Card>
-                <Card.Title className="mt-2">
-                    Пользователи </Card.Title>
-                <UserTable permission={data.userRole} userList={data.userList}></UserTable>
-            </Card>
-        </Col>
-        <Col className="rounded-1 border-2 border-black mt-2">
-            <Card>
-                <Card.Title className="mt-2"> Цели</Card.Title>
-                <GoalTable permission={data.userRole} goalList={data.goalList}></GoalTable>
-            </Card>
-        </Col>
-    </Row>
-</Container>
-</div>
-)
+                <Row className="flex-row flex-wrap flex-grow-1">
+                    <Col className="rounded-1 border-2 border-black mt-2">
+                        <Card>
+                            <Card.Title className="mt-2">
+                                Пользователи </Card.Title>
+                            <UserTable permission={data.userRole} userList={data.userList}></UserTable>
+                        </Card>
+                    </Col>
+                    <Col className="rounded-1 border-2 border-black mt-2">
+                        <Card>
+                            <Card.Title className="mt-2"> Цели</Card.Title>
+                            <GoalTable permission={data.userRole} goalList={data.goalList}></GoalTable>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
+        </div>
+
+    )
 
 }
 

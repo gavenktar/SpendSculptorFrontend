@@ -50,7 +50,7 @@ function ReceiptChart({receiptList, weight}) {
             }
 
         })
-        setDates(dates);
+        setDates([... new Set(dates)]);
     }
 
 

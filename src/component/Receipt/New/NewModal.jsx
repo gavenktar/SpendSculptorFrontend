@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal"
 import {useParams} from "react-router-dom";
@@ -8,18 +8,6 @@ import ReceiptModal from "../ReceiptModal";
 import ImageModal from "./Image/ImageModal";
 import {instance} from "../../../api/axiosConfig";
 import {EmptyReceipt} from "../../../constants/Constants";
-
-
-const mock1 = [
-    {
-        "categoryId": 1,
-        "categoryName": "Выпивка"
-    },
-    {
-        "categoryId": 2,
-        "categoryName": "Сухофрукты"
-    }
-]
 
 
 
@@ -38,7 +26,16 @@ const NewModal = () => {
 
     const [showInputModal, changeInputShow] = useState(false)
 
-    const [categories, setCategories] = useState(mock1)
+
+    useEffect(async () => {
+        const response = await instance.get("categories/all");
+        setCategories(response.data);
+    }, []);
+
+    let emptyCategory = {
+
+    }
+    const [categories, setCategories] = useState()
 
     const [imageModalState, setImageModalState] = useState(false)
 
@@ -73,8 +70,6 @@ const NewModal = () => {
     const confirm = async () => {
         const url = `account/${accountid.id}/receipt/new`;
 
-
-
         try {
             const data =JSON.parse(JSON.stringify(newReceipt, (key, value) => (value === '' ? null : value), 2));
             const result = await instance.post(url, data)
@@ -89,7 +84,7 @@ const NewModal = () => {
         <>
             {message && <Alert > {message}</Alert>}
             <ImageModal newReceipt={newReceipt} state={imageModalState} close={closeImage} closeOnConfirm={closeOnConfirm} setNewReceipt={changeReceipt} />
-            <ReceiptModal receipt={newReceipt} confirm={confirm} handle={handleModalClose} changeMode={changeMode}
+            <ReceiptModal changeCategories={setCategories} receipt={newReceipt} confirm={confirm} handle={handleModalClose} changeMode={changeMode}
                           state={showInputModal} categories={categories} changeInputFields={setInputFields}
                           inputFields={inputFields} setCurrReceipt={changeReceipt}/>
             <Modal
