@@ -72,7 +72,6 @@ const ReceiptModal = ({
         let newfield = {name: '', category: '', price: ''}
         changeInputFields([...inputFields, newfield]);
         receipt.total = calculateTotal(inputFields)
-
     }
 
     const handleDate = (e) => {

@@ -75,6 +75,7 @@ const NewModal = () => {
     const confirm = async () => {
         const url = `account/${accountid.id}/receipt/new`;
         try {
+            newReceipt.positionList = inputFields
             let data = JSON.parse(JSON.stringify(newReceipt, (key, value) => (value === '' ? null : value), 2));
             data["date"] = new Date(data["date"]).getTime() || new Date().getTime();
             const result = await instance.post(url, data)
