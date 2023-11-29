@@ -3,7 +3,7 @@ import {createContext, useContext, useEffect, useState} from "react";
 
 
 export const instance =  axios.create({
-    baseURL:'http://192.168.79.224:8080/',
+    baseURL:'http://localhost:8080/',
     withCredentials: true,
 });
 

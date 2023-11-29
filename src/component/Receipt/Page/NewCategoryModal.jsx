@@ -13,7 +13,7 @@ const NewCategoryModal = ({state, handleSave, handleCancel}) => {
         <>
             <Modal show={state} onHide={handleCancel}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title>Добавить новую категорию</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>

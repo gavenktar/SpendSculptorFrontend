@@ -30,8 +30,9 @@ const AccountForm = () => {
         dataToSend = Object.fromEntries(formData);
         if (!enabledDate){
             delete dataToSend.check;
-            dataToSend["date"] = newDate;
+            dataToSend["date"] = new Date(newDate).getTime();
         }else{
+            dataToSend["date"] = new Date().getTime();
             delete dataToSend.check;
         }
         instance.post("/accounts/new",dataToSend).then(response => {

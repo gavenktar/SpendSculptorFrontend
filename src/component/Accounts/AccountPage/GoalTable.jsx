@@ -43,7 +43,11 @@ const UserTable = ({goalList, permission}) => {
     const handleSave = async (data) => {
         const url = `/account/${id.id}/goal/`
         try {
-            const response = await instance.post(url, data)
+            let sendData = {...data}
+            sendData["dateStart"] = new Date(sendData["dateStart"]).getTime()
+            sendData["dateEnd"] = new Date(sendData["dateEnd"]).getTime()
+
+            const response = await instance.post(url, sendData)
             if (response.status === 200) {
                 setModalMessage("Цель успешно добавлена");
                 setTimeout(() => {

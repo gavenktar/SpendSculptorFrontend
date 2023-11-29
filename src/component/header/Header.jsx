@@ -51,7 +51,7 @@ const Header = ({headerData, updateData}) => {
                         : (
                             <>
                                 <Button variant="outline-info" className="me-3"> <NavLink className="nav-link"
-                                                                                          to="/">{headerData} </NavLink></Button>
+                                                                                          to="/profile">{headerData} </NavLink></Button>
                                 <Button variant="outline-info" className="me-3" onClick={handleLogout}> <NavLink className="nav-link"
                                                                                           to="/">Выйти </NavLink></Button>
 

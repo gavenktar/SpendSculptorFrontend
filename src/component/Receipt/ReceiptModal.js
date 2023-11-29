@@ -131,9 +131,10 @@ const ReceiptModal = ({
     return (
         <>
             {newCategoryModal &&
-                <NewCategoryModal state={newCategoryModal} handleSave={handleSave} newCategoryValue={newCategoryValue}
+                <NewCategoryModal className = "w-75" state={newCategoryModal} handleSave={handleSave} newCategoryValue={newCategoryValue}
                                   setCategoryValue={setCategoryValue} handleCancel={handleClose}/>}
-            <Modal show={state} onHide={handle}>
+            <Modal size="lg"
+                   show={state} onHide={handle}>
                 <Modal.Header closeButton>
                     <Modal.Title>Чек</Modal.Title>
                 </Modal.Header>

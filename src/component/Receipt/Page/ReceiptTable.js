@@ -2,8 +2,10 @@ import {Table} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import {useState} from "react";
 import ReceiptModal from "../ReceiptModal";
-import parseDate from "../../../utils/utils";
+
+import {parseDate} from "../../../utils/utils";
 import {instance} from "../../../api/axiosConfig";
+import {NavLink} from "react-router-dom";
 
 const ReceiptTable = ({receiptList, userid, permission, setList, weight, account, categories, setCategories}) => {
 
@@ -18,8 +20,8 @@ const ReceiptTable = ({receiptList, userid, permission, setList, weight, account
         setList(receiptList)
         const url = `receipt/${receipt.receiptId}/update`
         const submitData = receiptList[id];
-        submitData.date = parseDate(new Date(submitData.date));
         const data = JSON.parse(JSON.stringify(receiptList[id], (key, value) => (value === '' ? null : value), 2));
+        data["date"] =new Date(submitData.date).getTime();
         const result = await instance.post(url, data)
         handleClose()
     }
@@ -143,7 +145,15 @@ const ReceiptTable = ({receiptList, userid, permission, setList, weight, account
                             </tr>
                         </>
                     ))}
-
+                    <tr>
+                        <td> <Button variant="primary" className="h-100">
+                            <NavLink className="w-100 h-100" to={`./categories`}>
+                                <text  className="text-white">
+                                    Перейти к аналитике по покупкам и категориям
+                                </text>
+                            </NavLink>
+                        </Button></td>
+                    </tr>
                     </tbody>
                 </Table>
             </div>

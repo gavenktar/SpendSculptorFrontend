@@ -162,7 +162,6 @@ const AccountPage = () => {
                 </Row>
             </Container>
         </div>
-
     )
 
 }

@@ -99,5 +99,15 @@ export const ACCOUNT_ROLES = {
 }
 
 
+export const DATE_PRECISIONS = {
+    DAY: "DAY",
+    WEEK : "WEEK",
+    MONTH: "MONTH",
+    YEAR: "YEAR"
+}
+
+
+
+
 
 

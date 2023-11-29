@@ -11,6 +11,9 @@ import AccountPage from "./component/Accounts/AccountPage";
 import ReceiptPage from "./component/Receipt/Page/ReceiptPage";
 import {LineElement} from "chart.js";
 import NewModal from "./component/Receipt/New/NewModal";
+import {CategoryAnalytics} from "./component/Receipt/ByCategory/CategoryAnalytics";
+import {UserPage} from "./component/UserPage/UserPage";
+import {AdminPage} from "./component/UserPage/AdminPage";
 
 
 function App() {
@@ -34,6 +37,10 @@ function App() {
                     <Route path="/account/:id" element={<AccountPage/>}/>
                     <Route path="/account/:id/receipts" element = {<ReceiptPage />}/>
                     <Route path="/account/:id/receipt/new" element={<NewModal/>} />
+                    <Route path="/user/receipts" element =  {<ReceiptPage/>}   />
+                    <Route path="/account/:id/receipts/categories" element={<CategoryAnalytics/>} />
+                    <Route path="/profile" element={<UserPage/>} />
+                    <Route path="/admin" element={<AdminPage/>}/>
                 </Routes>
         </div>
     );

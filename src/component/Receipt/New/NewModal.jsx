@@ -10,8 +10,9 @@ import {instance} from "../../../api/axiosConfig";
 import {EmptyReceipt} from "../../../constants/Constants";
 
 
-
 const NewModal = () => {
+
+    const [ready, setReady] = useState(false)
 
     let accountid = useParams();
 
@@ -27,36 +28,40 @@ const NewModal = () => {
     const [showInputModal, changeInputShow] = useState(false)
 
 
-    useEffect(async () => {
-        const response = await instance.get("categories/all");
-        setCategories(response.data);
+
+
+    useEffect( () => {
+        const fetch = async () => {
+            const response = await instance.get("categories/all");
+            setCategories(response.data);
+            setReady(true)
+        }
+        fetch();
     }, []);
 
-    let emptyCategory = {
-
-    }
     const [categories, setCategories] = useState()
+
 
     const [imageModalState, setImageModalState] = useState(false)
 
-    const closeOnConfirm = (newRec)=>{
+    const closeOnConfirm = (newRec) => {
         changeInputShow(true);
         setInputFields(newRec.positionList)
     }
 
-    const showImage =  () => {
+    const showImage = () => {
         handleModalClose()
         setImageModalState(true)
     }
 
     const [message, setMessage] = useState(null)
 
-    const showInput = () =>{
+    const showInput = () => {
         closeImage()
         changeInputShow(true)
     }
 
-    const closeImage = () =>{
+    const closeImage = () => {
         setImageModalState(false)
     }
 
@@ -69,60 +74,64 @@ const NewModal = () => {
 
     const confirm = async () => {
         const url = `account/${accountid.id}/receipt/new`;
-
         try {
-            const data =JSON.parse(JSON.stringify(newReceipt, (key, value) => (value === '' ? null : value), 2));
+            let data = JSON.parse(JSON.stringify(newReceipt, (key, value) => (value === '' ? null : value), 2));
+            data["date"] = new Date(data["date"]).getTime() || new Date().getTime();
             const result = await instance.post(url, data)
             setMessage("Чек успешно добавлен")
             handleModalClose()
-        }catch (e){
+        } catch (e) {
             setMessage("Произошла ошибка")
         }
     }
 
     return (
-        <>
-            {message && <Alert > {message}</Alert>}
-            <ImageModal newReceipt={newReceipt} state={imageModalState} close={closeImage} closeOnConfirm={closeOnConfirm} setNewReceipt={changeReceipt} />
-            <ReceiptModal changeCategories={setCategories} receipt={newReceipt} confirm={confirm} handle={handleModalClose} changeMode={changeMode}
-                          state={showInputModal} categories={categories} changeInputFields={setInputFields}
-                          inputFields={inputFields} setCurrReceipt={changeReceipt}/>
-            <Modal
-                show={show}
-                onHide={handleClose}
-                backdrop="static"
-                keyboard={false}
-            >
-                <Modal.Header closeButton>
-                    <Modal.Title>Выберите вариант создания</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Row>
-                        <Col>
-                            <Card>
-                                <Card.Title className="m-2"> Вариант 1 </Card.Title>
-                                <Card.Body>
-                                    <Button onClick={(e) => showInput()}> Нажми на меня</Button>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        <Col>
-                            <Card>
-                                <Card.Title className="m-2"> Вариант 2 </Card.Title>
-                                <Card.Body>
-                                    <Button onClick={(e) => showImage()} >Сканировать с фото</Button>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    </Row>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Отмена
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-        </>
+        <> {ready &&
+            <>
+                {message && <Alert> {message}</Alert>}
+                <ImageModal newReceipt={newReceipt} state={imageModalState} close={closeImage}
+                            closeOnConfirm={closeOnConfirm} setNewReceipt={changeReceipt}/>
+                <ReceiptModal changeCategories={setCategories} receipt={newReceipt} confirm={confirm}
+                              handle={handleModalClose} changeMode={changeMode}
+                              state={showInputModal} categories={categories} changeInputFields={setInputFields}
+                              inputFields={inputFields} setCurrReceipt={changeReceipt}/>
+                <Modal
+                    show={show}
+                    onHide={handleClose}
+                    backdrop="static"
+                    keyboard={false}
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title>Выберите вариант создания</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Row>
+                            <Col>
+                                <Card>
+                                    <Card.Title className="m-2"> Вариант 1 </Card.Title>
+                                    <Card.Body>
+                                        <Button onClick={(e) => showInput()}> Нажми на меня</Button>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                            <Col>
+                                <Card>
+                                    <Card.Title className="m-2"> Вариант 2 </Card.Title>
+                                    <Card.Body>
+                                        <Button onClick={(e) => showImage()}>Сканировать с фото</Button>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        </Row>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Отмена
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            </>
+        } </>
     );
 }
 
