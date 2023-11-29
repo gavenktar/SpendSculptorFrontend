@@ -10,6 +10,8 @@ export const AdminUsers = () => {
 
     const [data, setData] = useState([]);
 
+
+
     const fecthUsers = () =>{
         const response = instance.get("/admin/users").then(
             response => {
@@ -23,12 +25,13 @@ export const AdminUsers = () => {
     }
 
     const onDeleteItem = (item) => {
-        setLoaded(false)
         return () => {
             instance.delete(`/admin/users/${item.login}`).then(
                 response => {
-                    fecthUsers()
+                    fecthUsers();
+
                 }
+
             ).catch(error => {
                     setError(error)
                 }
@@ -36,11 +39,20 @@ export const AdminUsers = () => {
         }
     }
 
-    const [loaded, setLoaded] = useState(false);
+    const [loaded, setLoaded] = useState(true);
     const [error, setError] = useState(false);
 
     useEffect(() => {
-        fecthUsers();
+        const response = instance.get("/admin/users").then(
+            response => {
+                setData(response.data)
+                setLoaded(true)
+            }
+        ).catch(error => {
+                setError(error)
+            }
+        )
+        if (data.length !== 0) setLoaded(true)
     }, []);
 
     if (error) {
@@ -89,7 +101,6 @@ export const AdminUsers = () => {
                                 { item.surname }
                             </td>
                             <td>
-                                {ACCOUNT_ROLES[item.role] }
                             </td>
                             <td>
                             <Button className="m-1" onClick={onDeleteItem(item)} variant="secondary">

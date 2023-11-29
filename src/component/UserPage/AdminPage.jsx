@@ -28,7 +28,7 @@ export const AdminPage = () =>{
                         <Tab.Pane eventKey = "profile"><UserPage/></Tab.Pane>
                     </Tab.Content>
                     <Tab.Content>
-                        <Tab.Pane eventKey = "users"> <AdminUsers/></Tab.Pane>
+                        <Tab.Pane eventKey = "users"> <AdminUsers/>  </Tab.Pane>
                     </Tab.Content>
                     <Tab.Content>
                         <Tab.Pane eventKey = "accounts"> <AdminAccounts/> </Tab.Pane>
