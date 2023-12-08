@@ -4,7 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import {NavLink} from "react-router-dom";
 import {useContext, useEffect, useState} from "react";
-import {instance} from "../../api/axiosConfig";
+import {instance} from "../../axios/axiosConfig";
 
 const Header = ({headerData, updateData}) => {
 
@@ -37,7 +37,6 @@ const Header = ({headerData, updateData}) => {
                         navbarScroll
                     >
                         <NavLink className="nav-link" to="/">Главная страница</NavLink>
-                        <NavLink className="nav-link" to="/receipt/new">Создать чек</NavLink>
                         <NavLink className="nav-link" to="/accounts">Мои счета</NavLink>
                         <NavLink className="nav-link" to="/">О нас</NavLink>
 

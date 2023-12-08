@@ -1,7 +1,7 @@
 import {Alert, Table} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import {useState} from "react";
-import {instance} from "../../../api/axiosConfig";
+import {instance} from "../../../axios/axiosConfig";
 import {useParams} from "react-router-dom";
 import NewGoalModal from "./NewGoalModal";
 

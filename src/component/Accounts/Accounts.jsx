@@ -1,5 +1,5 @@
 import {CardGroup} from "react-bootstrap";
-import {instance} from "../../api/axiosConfig";
+import {instance} from "../../axios/axiosConfig";
 import AccountCard from "./accountCard/AccountCard";
 import {useEffect, useState} from "react";
 import Container from "react-bootstrap/Container";

@@ -6,7 +6,7 @@ import Card from "react-bootstrap/Card";
 import {Alert, Col, Row} from "react-bootstrap";
 import ReceiptModal from "../ReceiptModal";
 import ImageModal from "./Image/ImageModal";
-import {instance} from "../../../api/axiosConfig";
+import {instance} from "../../../axios/axiosConfig";
 import {EmptyReceipt} from "../../../constants/Constants";
 
 
@@ -111,7 +111,7 @@ const NewModal = () => {
                                 <Card>
                                     <Card.Title className="m-2"> Вариант 1 </Card.Title>
                                     <Card.Body>
-                                        <Button onClick={(e) => showInput()}> Нажми на меня</Button>
+                                        <Button onClick={(e) => showInput()}> Добавить вручную</Button>
                                     </Card.Body>
                                 </Card>
                             </Col>

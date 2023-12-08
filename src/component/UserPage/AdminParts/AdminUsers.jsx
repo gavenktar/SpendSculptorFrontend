@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {Col, Row, Spinner, Table} from "react-bootstrap";
-import {instance} from "../../../api/axiosConfig";
+import {instance} from "../../../axios/axiosConfig";
 import Button from "react-bootstrap/Button";
 import {ACCOUNT_ROLES} from "../../../constants/Constants";
 import Container from "react-bootstrap/Container";

@@ -1,5 +1,5 @@
 import React, {useContext, useState} from "react"
-import {instance} from "../../api/axiosConfig";
+import {instance} from "../../axios/axiosConfig";
 import data from "bootstrap/js/src/dom/data";
 import * as events from "events";
 import {useNavigate} from "react-router-dom";

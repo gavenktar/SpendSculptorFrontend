@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import ReceiptTable from "../ReceiptTable";
-import {instance} from "../../../../api/axiosConfig";
+import {instance} from "../../../../axios/axiosConfig";
 
 
 const UserReceipt = ({data, changeData, setCategories , categories})=>{

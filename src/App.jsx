@@ -13,7 +13,7 @@ import NewModal from "./component/Receipt/New/NewModal";
 import {CategoryAnalytics} from "./component/Receipt/ByCategory/CategoryAnalytics";
 import {UserPage} from "./component/UserPage/UserPage";
 import {AdminPage} from "./component/UserPage/AdminPage";
-import {instance} from "./api/axiosConfig";
+import {instance} from "./axios/axiosConfig";
 
 function App() {
 

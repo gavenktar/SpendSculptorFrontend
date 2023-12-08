@@ -1,6 +1,6 @@
 import {useLocation, useParams} from 'react-router-dom';
 import {useEffect, useState} from "react";
-import {instance} from "../../../api/axiosConfig";
+import {instance} from "../../../axios/axiosConfig";
 import AccountReceipt from "./Adapter/AccountReceipt";
 import UserReceipt from "./Adapter/UserReceipt";
 import {EmptyFullAccount, EmptyReceipt} from "../../../constants/Constants";

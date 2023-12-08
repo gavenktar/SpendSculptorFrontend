@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {Spinner, Table} from "react-bootstrap";
-import {instance} from "../../../api/axiosConfig";
+import {instance} from "../../../axios/axiosConfig";
 
 export const AdminAccounts = () => {
     const [isLoaded, setIsLoaded] = useState(false)

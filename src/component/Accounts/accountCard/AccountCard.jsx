@@ -3,12 +3,12 @@ import {NavLink, useNavigate} from "react-router-dom";
 import React, {useState} from "react";
 import Button from "react-bootstrap/Button";
 import { newAccountFakeObject } from "../../../constants/Constants"
-import {instance} from "../../../api/axiosConfig";
+import {instance} from "../../../axios/axiosConfig";
 
 const AccountCard = (props)=>{
     let item;
     if (props === undefined) return;
-    let url = 'accounts/delete/' + props.item.id
+    let url = 'account/' + props.item.id
     const leaveAccount =  (e) =>{
         instance.delete(url).then(
             r =>{

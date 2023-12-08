@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {Accordion, Col, Row, Spinner} from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import {useLocation, useNavigate} from "react-router-dom";
-import {instance} from "../../../api/axiosConfig";
+import {instance} from "../../../axios/axiosConfig";
 import {DATE_PRECISIONS} from "../../../constants/Constants";
 import {convertLongToDate, convertToDate} from "../../../utils/utils";
 import Card from "react-bootstrap/Card";

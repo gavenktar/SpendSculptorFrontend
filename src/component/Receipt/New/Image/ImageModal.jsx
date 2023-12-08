@@ -2,7 +2,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal"
 import {Alert, Form, Spinner} from "react-bootstrap";
 import {useState} from "react";
-import {instance} from "../../../../api/axiosConfig";
+import {instance} from "../../../../axios/axiosConfig";
 
 const ImageModal = ({newReceipt, setNewReceipt, state, close, closeOnConfirm}) => {
     const [error, setError] = useState(null)

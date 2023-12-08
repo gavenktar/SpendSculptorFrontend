@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import parseDate from "../../utils/utils";
 import Button from "react-bootstrap/Button";
 import NewCategoryModal from "./Page/NewCategoryModal";
-import {instance} from "../../api/axiosConfig";
+import {instance} from "../../axios/axiosConfig";
 
 
 const ReceiptModal = ({

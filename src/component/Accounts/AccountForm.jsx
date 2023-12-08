@@ -2,7 +2,7 @@ import {Alert, Form} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import {useState} from "react";
 import data from "bootstrap/js/src/dom/data";
-import {instance} from "../../api/axiosConfig";
+import {instance} from "../../axios/axiosConfig";
 
 
 const AccountForm = () => {

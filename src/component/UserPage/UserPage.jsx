@@ -1,6 +1,6 @@
 import {Col, Form, Row, Spinner} from "react-bootstrap";
 import {useEffect, useState} from "react";
-import {instance} from "../../api/axiosConfig";
+import {instance} from "../../axios/axiosConfig";
 import Card from "react-bootstrap/Card";
 
 

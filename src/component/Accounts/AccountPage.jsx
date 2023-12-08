@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {instance} from "../../api/axiosConfig";
+import {instance} from "../../axios/axiosConfig";
 import {NavLink, useParams} from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import {Col, Form, FormCheck, Row} from "react-bootstrap";

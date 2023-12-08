@@ -4,7 +4,7 @@ import {useState} from "react";
 import ReceiptModal from "../ReceiptModal";
 
 import {parseDate} from "../../../utils/utils";
-import {instance} from "../../../api/axiosConfig";
+import {instance} from "../../../axios/axiosConfig";
 import {NavLink} from "react-router-dom";
 
 const ReceiptTable = ({receiptList, userid, permission, setList, weight, account, categories, setCategories}) => {

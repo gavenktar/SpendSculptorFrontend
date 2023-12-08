@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import {useState} from "react";
 import NewPersonModal from "./NewPersonModal";
 import {ACCOUNT_ROLES} from "../../../constants/Constants";
-import {instance} from "../../../api/axiosConfig";
+import {instance} from "../../../axios/axiosConfig";
 import {useParams} from "react-router-dom";
 import {almostWhole} from "chart.js/helpers";
 
