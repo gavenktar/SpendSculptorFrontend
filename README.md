@@ -1,70 +1,36 @@
-# Getting Started with Create React App
+![2023-11-24 18-07-09](https://github.com/gavenktar/SpendSculptor/assets/97042266/070b5df8-9a56-48ae-b1cd-be449d3107e3)![2023-11-24 18-07-09](https://github.com/gavenktar/SpendSculptor/assets/97042266/4e35bdb2-3fda-462f-bd43-25f96f3690fd)# SpendSculptor
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Веб приложение для учета расходов с возможностью распознования по фото
 
-## Available Scripts
+## Технологии
 
-In the project directory, you can run:
+- **Java:**
+- **Spring - Boot, MVC, Security, Data:**
+- **JavaScript (React):**
 
-### `npm start`
+## Вы находитесь на странице клиентской части, чтобы перейти к клиентской нажмите [сюда](https://github.com/gavenktar/SpendSculptor)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Функции
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Сканирование чека по фото:** 
+ Работает с русским языком.
 
-### `npm test`
+- **Совместные счета:** 
+   - Добавляйте пользователей в совместные счета.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Цели:** 
+   - Ставьте и достигайте поставленных целей.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **Категории:** 
+   - Добавляйте свои собственные категории.
+   - Получайте статистику по расходам на них.
+ 
+  
+# Страница счета
+  ![](https://github.com/gavenktar/visual/blob/main/2023-11-24%2018-07-09.gif)
+  # Страница чеков
+ ![](https://github.com/gavenktar/visual/blob/main/2023-11-24%2018-07-09_2.gif)
+ # Cтраница аналитики по категориям
+![](https://github.com/gavenktar/visual/blob/main/2023-11-24%2018-07-09_3.gif)
+# Страница добавления чека по фото
+![](https://github.com/gavenktar/visual/blob/main/2023-11-24%2018-07-09_4.gif)
