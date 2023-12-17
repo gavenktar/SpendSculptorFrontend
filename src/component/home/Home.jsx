@@ -18,7 +18,7 @@ const Home=  () => {
                 <Card.Body>
                     <Card.Title>1) Зарегистрируйтесь в приложении</Card.Title>
                     <Button variant="primary">
-                        <NavLink style={linkStyle} to="/">Зарегистрироваться</NavLink>
+                        <NavLink style={linkStyle} to="/auth">Зарегистрироваться</NavLink>
                     </Button>
                 </Card.Body>
             </Card>
@@ -26,7 +26,7 @@ const Home=  () => {
                 <Card.Body>
                     <Card.Title>2) Добавьте счет</Card.Title>
                     <Button variant="primary">
-                        <NavLink style={linkStyle} to="/">Добавить счет</NavLink>
+                        <NavLink style={linkStyle} to="/accounts">Добавить счет</NavLink>
                     </Button>
                 </Card.Body>
             </Card>
@@ -44,7 +44,7 @@ const Home=  () => {
                 <Card.Body>
                     <Card.Title>4) Учитывайте финансы и экономьте деньги</Card.Title>
                     <Button variant="primary">
-                        <NavLink style={linkStyle} to="/">Перейти к финансам</NavLink>
+                        <NavLink style={linkStyle} to="/accounts">Перейти к финансам</NavLink>
                     </Button>
                 </Card.Body>
             </Card>
